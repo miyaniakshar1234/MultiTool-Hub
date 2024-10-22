@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Scheme Generator</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <style>
+       body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1e272e;
+            color: #ecf0f1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #4c5961;
+            color: #fff;
+            text-align: left;
+            padding: 0.5em;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        header img {
+            margin-right: 20px;
+            margin-left: 20px;
+            height: 80px;
+        }
+
+        header h1 {
+            font-size: 2.2em;
+            color: #fff;
+            text-decoration: none;
+            margin: 0;
+            font-family: 'Densia Sans', sans-serif;
+        }
+
+        nav {
+            margin-left: auto;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 25px;
+            font-size: 20px;
+        }
+        .nav-button {
+            color: #fff;
+            text-decoration: none;
+            margin: 10px 15px; /* Adjust margin as needed */
+            font-size: 22px;
+            position: relative;
+            transition: 0.3s;
+            padding: 10px 20px; /* Adjust padding to control button size */
+        }
+
+        .nav-button:hover {
+            background-color: #ddd;
+            color: black;
+            border-radius: 6px;
+        }
+
+       .nav-button.active {
+            background-color: rgb(13, 185, 170);
+            color: black;
+            border-radius: 6px;
+        }
+
+        /* Button Interaction Effect */
+                .nav-button::before {
+            content: "";
+            position: absolute;
+            width: 0px;
+            height: 4px;
+            bottom: 0;
+            left: 50%;
+            background-color: rgb(13, 185, 170);
+            transition: 0.3s;
+            border-radius: 6px;
+        }
+        .nav-button:hover::before,
+        .nav-button.active::before {
+            width: 100%;
+            left: 0;
+        }
+
+
+        #tools-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 50px;
+            box-sizing: border-box;
+            width: 95%;
+        }
+
+        #left-tools,
+        #right-tools {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 20%; /* Adjusted width */
+        }
+
+        .tool-card {
+            background-color: rgb(13, 185, 170);
+            color: rgb(18, 16, 16);
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            width: 100%;
+        }
+
+        .tool-card a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight:600;
+            color:#140401;
+            text-align: center;
+            height: 60px;
+            line-height: 50px;
+        }
+
+        .tool-card:hover {
+            transform: scale(1.2);
+        }
+        #container {
+            max-width: 600px;
+            width: 100%;
+            border: 5px solid #bdd6db;
+            background-color: #34495e;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            color: #3498db;
+        }
+
+        #colorBox {
+            width: 100%;
+            height: 150px;
+            margin: 20px 10px;
+            border-radius: 15px;
+        }
+
+        #colorSettings {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        input, #colorPicker {
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+            border: 1px solid #3498db;
+            border-radius: 10px;
+            background-color: #fbfeff;
+            color: #2c3e50;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        p {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: auto;
+        }
+
+        .back-to-home {
+            margin-top: 20px;
+            background-color: #e74c3c;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .back-to-home:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+<!--#include virtual="header.html" -->
+<header>
+    <a href="index.html">
+        <img src="logo.png" alt="Website Logo"></a>
+        <h1>
+            <a href="index.html" style="text-decoration: none; color: #fff;"> Multitool Hub </a>
+        </h1>
+    <nav>
+ <a href="index.html" class="nav-button">Home</a>
+            <a href="About Us.html" class="nav-button">About Us</a>
+            <a href="Contact Us.html" class="nav-button">Contact Us</a>
+            <a href="Help.html" class="nav-button">Help</a>
+    </nav>
+</header>
+
+<div id="tools-container">
+    <div id="left-tools">
+        <div class="tool-card">
+            <a href="Age_Calculator.html" class="tool-button">Age Calculator</a>
+        </div>
+        <div class="tool-card">
+            <a href="Stop_watch.html" class="tool-button">Stopwatch</a>
+        </div>
+        <div class="tool-card">
+            <a href="Countdown_timer.html" class="tool-button">Timer</a>
+        </div>
+        <div class="tool-card">
+            <a href="Image_Comprosser.html" class="tool-button">Image Compressor</a>
+        </div>
+        <div class="tool-card">
+            <a href="JPG_to_PNG.html" class="tool-button">JPG to PNG Converter</a>
+        </div>
+        <div class="tool-card">
+            <a href="Background_Remover.html" class="tool-button">Background Remover</a>
+        </div>
+        <!-- Add more tool cards for left tools -->
+    </div>
+<br>
+<div id="container">
+    <h1>Color Scheme Generator</h1>
+
+    <div id="colorBox"></div>
+
+    <div id="colorSettings">
+        <input type="text" id="hexInput" placeholder="Enter HEX color">
+        <input type="color" id="colorPicker">
+        <button onclick="setColorFromInput()">Set Color</button>
+    </div>
+
+    <button onclick="generateRandomColor()">Generate Random Color</button>
+
+    <p>HEX: <span id="hexValue"></span></p>
+    <p>RGB: <span id="rgbValue"></span></p>
+    <button class="back-to-home" onclick="goBack()">Back to Home</button>
+</div>
+<br>
+       <div id="right-tools">
+            <div class="tool-card">
+                <a href="Color_Scheme_Generator.html" class="tool-button">Color Scheme Generator</a>
+            </div>
+            <div class="tool-card">
+                <a href="Bank_IFSC_Code_Checker.html" class="tool-button">Bank IFSC Code Checker</a>
+            </div>
+            <div class="tool-card">
+                <a href="Strong_Password_Generator.html" class="tool-button">Strong Password</a>
+            </div>
+            <div class="tool-card">
+                <a href="image_resizer.html" class="tool-button">Image Resizer</a>
+            </div>
+            <div class="tool-card">
+                <a href="Digital_Signature.html" class="tool-button">Digital Signature</a>
+            </div>
+            <!-- Add more tool cards for right tools -->
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 Multitool Hub | "This is a GMIU student project"
+    </footer>
+
+
+<script>
+    document.getElementById('colorPicker').addEventListener('input', function() {
+        const color = this.value;
+        setColor(color);
+        updateColorInput(color);
+    });
+
+    function generateRandomColor() {
+        const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+        setColor(randomColor);
+        updateColorInput(randomColor);
+    }
+
+    function setColorFromInput() {
+        const hexInput = document.getElementById('hexInput').value;
+        setColor(hexInput);
+        updateColorInput(hexInput);
+    }
+
+    function setColor(hexColor) {
+        const colorBox = document.getElementById('colorBox');
+        const hexValue = document.getElementById('hexValue');
+        const rgbValue = document.getElementById('rgbValue');
+
+        colorBox.style.backgroundColor = hexColor;
+        hexValue.textContent = hexColor;
+        rgbValue.textContent = hexToRgb(hexColor);
+    }
+
+    function updateColorInput(hexColor) {
+        document.getElementById('colorPicker').value = hexColor;
+    }
+
+    function hexToRgb(hex) {
+        hex = hex.replace(/^#/, '');
+        const bigint = parseInt(hex, 16);
+        const r = (bigint >> 16) & 255;
+        const g = (bigint >> 8) & 255;
+        const b = bigint & 255;
+        return `(${r}, ${g}, ${b})`;
+    }
+
+    function goBack() {
+        window.location.href ="index.html";
+    }
+</script>
+
+</body>
+</html>

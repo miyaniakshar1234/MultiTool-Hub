@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JPG to PNG Converter</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1e272e;
+            color: #ecf0f1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #4c5961;
+            color: #fff;
+            text-align: left;
+            padding: 0.5em;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        header img {
+            margin-right: 20px;
+            margin-left: 20px;
+            height: 80px;
+        }
+
+        header h1 {
+            font-size: 2.2em;
+            color: #fff;
+            text-decoration: none;
+            margin: 0;
+            font-family: 'Densia Sans', sans-serif;
+        }
+
+        nav {
+            margin-left: auto;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 25px;
+            font-size: 20px;
+        }
+        .nav-button {
+            color: #fff;
+            text-decoration: none;
+            margin: 10px 15px; /* Adjust margin as needed */
+            font-size: 22px;
+            position: relative;
+            transition: 0.3s;
+            padding: 10px 20px; /* Adjust padding to control button size */
+        }
+
+        .nav-button:hover {
+            background-color: #ddd;
+            color: black;
+            border-radius: 6px;
+        }
+
+       .nav-button.active {
+            background-color: rgb(13, 185, 170);
+            color: black;
+            border-radius: 6px;
+        }
+
+        /* Button Interaction Effect */
+                .nav-button::before {
+            content: "";
+            position: absolute;
+            width: 0px;
+            height: 4px;
+            bottom: 0;
+            left: 50%;
+            background-color: rgb(13, 185, 170);
+            transition: 0.3s;
+            border-radius: 6px;
+        }
+        .nav-button:hover::before,
+        .nav-button.active::before {
+            width: 100%;
+            left: 0;
+        }
+
+        #tools-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 50px;
+            box-sizing: border-box;
+            width: 95%;
+        }
+
+        #left-tools,
+        #right-tools {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 20%; /* Adjusted width */
+        }
+
+        .tool-card {
+            background-color: rgb(13, 185, 170);
+            color: rgb(18, 16, 16);
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            width: 100%;
+        }
+
+        .tool-card a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight:600;
+            color:#140401;
+            text-align: center;
+            height: 60px;
+            line-height: 50px;
+        }
+
+        .tool-card:hover {
+            transform: scale(1.2);
+        }
+
+        #container {
+            max-width: 600px;
+            width: 100%;
+            border: 5px solid #bdd6db;
+            background-color: #34495e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #input {
+            display: none;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 20px;
+            background-color: #3498db;
+            color: #fff;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        #preview {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #2ecc71;
+            color: #fff;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: auto;
+        }
+
+        .back-to-home {
+            margin-top: 20px;
+            background-color: #e74c3c; /* Changed button color to red */
+        }
+
+        .back-to-home:hover {
+            background-color: #c0392b; /* Darker red on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="logo.png" alt="Website Logo"></a>
+            <h1>
+                <a href="index.html" style="text-decoration: none; color: #fff;"> Multitool Hub </a>
+            </h1>
+        <nav>
+             <a href="index.html" class="nav-button">Home</a>
+            <a href="About Us.html" class="nav-button">About Us</a>
+            <a href="Contact Us.html" class="nav-button">Contact Us</a>
+            <a href="Help.html" class="nav-button">Help</a>
+        </nav>
+    </header>
+
+    <div id="tools-container">
+        <div id="left-tools">
+            <div class="tool-card">
+                <a href="Age_Calculator.html" class="tool-button">Age Calculator</a>
+            </div>
+            <div class="tool-card">
+                <a href="Stop_watch.html" class="tool-button">Stopwatch</a>
+            </div>
+            <div class="tool-card">
+                <a href="Countdown_timer.html" class="tool-button">Timer</a>
+            </div>
+            <div class="tool-card">
+                <a href="Image_Comprosser.html" class="tool-button">Image Compressor</a>
+            </div>
+            <div class="tool-card">
+                <a href="JPG_to_PNG.html" class="tool-button">JPG to PNG Converter</a>
+            </div>
+            <div class="tool-card">
+                <a href="Background_Remover.html" class="tool-button">Background Remover</a>
+            </div>
+            <!-- Add more tool cards for left tools -->
+        </div>
+<br>
+<br><br>
+    <div id="container">
+        <h1 style="text-align: center;">JPG to PNG Converter</h1>
+
+        <label for="input">Choose JPG Image</label>
+        <input type="file" id="input" accept=".jpg, .jpeg" onchange="previewImage()">
+
+        <img id="preview" alt="Preview">
+
+        <button onclick="convertToPNG()">Convert to PNG</button>
+        </div>
+        
+        <br>
+        <div id="right-tools">
+             <div class="tool-card">
+                 <a href="Color_Scheme_Generator.html" class="tool-button">Color Scheme Generator</a>
+             </div>
+             <div class="tool-card">
+                 <a href="Bank_IFSC_Code_Checker.html" class="tool-button">Bank IFSC Code Checker</a>
+             </div>
+             <div class="tool-card">
+                 <a href="Strong_Password_Generator.html" class="tool-button">Strong Password</a>
+             </div>
+             <div class="tool-card">
+                 <a href="image_resizer.html" class="tool-button">Image Resizer</a>
+             </div>
+             <div class="tool-card">
+                 <a href="Digital_Signature.html" class="tool-button">Digital Signature</a>
+             </div>
+             <!-- Add more tool cards for right tools -->
+         </div>
+     </div>
+        <div>
+            <button class="back-to-home" onclick="goBack()">Back to Home</button>
+       </div>
+    <footer>
+        &copy; 2024 Multitool Hub | "This is a GMIU student project"
+    </footer>
+
+    <script>
+        function previewImage() {
+            const input = document.getElementById('input');
+            const preview = document.getElementById('preview');
+
+            const file = input.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function convertToPNG() {
+            const input = document.getElementById('input');
+            const preview = document.getElementById('preview');
+
+            if (!input.files.length) {
+                alert('Please choose a JPG image first.');
+                return;
+            }
+
+            const img = new Image();
+            img.src = preview.src;
+
+            img.onload = function () {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+
+                const dataURL = canvas.toDataURL('image/png');
+                const downloadLink = document.createElement('a');
+                downloadLink.href = dataURL;
+                downloadLink.download = 'converted_image.png';
+
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            };
+        }
+        function goBack() {
+            window.location.href ="index.html"; // Replace "index.html" with the actual home page URL
+        }
+    </script>
+</body>
+</html>
